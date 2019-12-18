@@ -11,6 +11,7 @@ logging.basicConfig(filename='\\testPython/app.log', filemode='a', format='%(asc
 
 #class that wait for an event, when it get's an event it call the Handler class and give him the event
 class Watcher:
+    # TODO change the directory to watch for the definitive directory
     DIRECTORY_TO_WATCH = "\\testPython"
 
     def __init__(self):
