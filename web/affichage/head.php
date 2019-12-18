@@ -1,5 +1,8 @@
 <?php
-
+include "/class/Pdo.php";
+if (!isset($_SESSION['Pdo'])) {
+    $_SESSION['Pdo'] = new requete("127.0.0.1", "thermiscan", "cfpt", "Super");
+}
 ?>
 <!DOCTYPE html>
 <html lang="FR">
