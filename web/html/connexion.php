@@ -11,20 +11,20 @@ include "../class/Pdo.php";
 session_start();
 
 
-print_r($_SESSION['Pdo']->Select("*", "users",'', ""));
-// $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-// $password = sha1(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING));
+
+$username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+$password = sha1(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING));
 
 
-// $resultat = ($_SESSION['Pdo']->Select("*", "users", 'username="' . $username . '" AND password = "' . $password . '"', ""));
+$resultat = ($_SESSION['Pdo']->Select("*", "users", 'username="' . $username . '" AND password = "' . $password . '"', ""));
 
-// if (($username == $resultat[0]['username']) and $password == $resultat[0]['password']) {
-//     $username = $resultat[0]['username'];
-//     $id = $resultat[0]['idUser'];
+if (($username == $resultat[0]['username']) and $password == $resultat[0]['password']) {
+    $username = $resultat[0]['username'];
+    $id = $resultat[0]['idUser'];
 
-//     header('Location: ../index.php?erreur=6');
-//     exit;
-// } else {
-//     header('Location: ../index.php?erreur=7');
-// }
+    header('Location: ../index.php?erreur=6');
+    exit;
+} else {
+    header('Location: ../index.php?erreur=7');
+}
 ?>
