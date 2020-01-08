@@ -1,5 +1,6 @@
 import logging # To create easy log file
 import time # For the time.sleep
+import image # For the image script
 
 # For the file detection, It doesn't work on 64-bit
 from watchdog.observers import Observer 
@@ -39,7 +40,7 @@ class Handler(FileSystemEventHandler):
             return None
 
         elif event.event_type == 'created':
-            #caller.some_func(event.src_path)
+            image.init(event.src_path)
             logging.warning('The file at %s has been added' % event.src_path)
 
 
