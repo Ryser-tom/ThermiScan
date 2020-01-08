@@ -1,5 +1,9 @@
 <?php
-
+if(isset($_SESSION['user']))
+{
+    echo ($_SESSION['user']->username . "</br>");
+    echo ($_SESSION['user']->idUser . "</br>");
+}
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Auteur  : Lorenzo Bauduccio
  * Classe  : Tech 1
@@ -66,4 +70,3 @@
                     <button type="submit" class="btn btn-primary expend">S'inscrire</button>
                 </form>
 
-?>
