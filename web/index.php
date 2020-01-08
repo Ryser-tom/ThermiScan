@@ -1,4 +1,5 @@
 <?php
+include "class/User.php";
 session_start();
 
 $title="Accueil";
