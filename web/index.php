@@ -1,5 +1,7 @@
 <?php
 include "class/User.php";
+include "class/fonction.php";
+include "class/Pdo.php";
 session_start();
 
 $title="Accueil";

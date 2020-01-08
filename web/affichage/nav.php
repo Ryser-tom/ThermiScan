@@ -14,7 +14,7 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="#">Home <span class="sr-only"></span></a>
-      <a class="nav-item nav-link" href="#">new</a>
+      <a class="nav-item nav-link" href="index.php?deco=1">deco</a>
 
     </div>
   </div>

@@ -20,10 +20,9 @@ if (($username == $resultat[0]['username']) and $password == $resultat[0]['passw
     $username = $resultat[0]['username'];
     $id = $resultat[0]['IdUser'];
     $_SESSION['user'] = new user("$username", "$id");
-    //header('Location: ../index.php');
+    header('Location: ../index.php');
     exit;
 } else {
-    echo"fils de pute";
-    //header('Location: ../index.php');
+    header('Location: ../index.php');
 }
 ?>
