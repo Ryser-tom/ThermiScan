@@ -3,7 +3,8 @@ import re
 import cv2
 import pytesseract as pyt
 from PIL import Image
-pyt.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\Tesseract.exe'
+#uncomment the next line to execute on Windows
+#pyt.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\Tesseract.exe'
 
 def init(file_name):
     print (file_name, 'ready for treatment')
