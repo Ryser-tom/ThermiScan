@@ -14,14 +14,28 @@ if (isset($_GET['deco'])) {
 }
 if(isset($_SESSION['user']))
 {
-    echo ($_SESSION['user']->username . "</br>");
-    echo ($_SESSION['user']->idUser . "</br>");
+    echo ("user: ".$_SESSION['user']->GetUsername() . "</br>");
+    echo ("ID:".$_SESSION['user']->GetidUser() . "</br>");
 }
+echo"</br>";
+echo "Liste camera user</br>";
 echo "-----------------</br>";
-$result =GetListOfCameraUser($_SESSION['user']->idUser);
+if (isset($_SESSION['user'])) {
+    $result = ($_SESSION['user']->GetListOfCameraUser());
+    $video = ($_SESSION['user']->GetListOfVideo());
+
 foreach ($result as $key => $value) {
-    echo "lol--plouf</br>";
+    echo( $result[$key]['nomCamera']."</br>");
 }
+}
+
+echo "-----------------</br>";
+echo"</br>";
+echo "Liste camera user</br>";
+echo "-----------------</br>";
+    $video = ($_SESSION['user']->GetListOfVideo());
+    echo"liste video";
+    print_r($video);
 echo "-----------------</br>";
 
 ?>
@@ -34,7 +48,26 @@ echo "-----------------</br>";
             <div class="form-group">
                 <h5 for="nom">Nom de la video</h5>
                 <input type="text" name="nom" class="form-control " required>
-            </div>        
+            </div>
+            <div class="btn-group">
+
+    <div class="form-group">
+    <label for="exampleFormControlSelect1">Example select</label>
+    <select class="form-control" name="camera">
+
+
+    <?php
+    if (isset($_SESSION['user'])) {
+    $result = ($_SESSION['user']->GetListOfCameraUser());
+
+foreach ($result as $key => $value) {
+    echo ('<option value="'.$result[$key]['idCamera'].'">'.$result[$key]['nomCamera'].'</a>');
+}
+}
+?>
+    </select>
+  </div>
+</div>        
             <div class="form-group">
                 <h5 for="nbr">fichier video</h5>
                 <input type="file" class="form-control-file" name="video" required="">

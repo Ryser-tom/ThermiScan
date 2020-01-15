@@ -20,7 +20,7 @@ if (strlen($nameCamera) < 5) {
 }else{
     $user = $_SESSION['user']->idUser;
     $_SESSION['Pdo']->Execute("INSERT INTO camera (nomCamera,IdUser) VALUES ('$nameCamera','$user')");
-    //header('Location: ../index.php?erreur=3');
-    echo"au top";
+    header('Location: ../index.php');
+    
     exit;
 }
