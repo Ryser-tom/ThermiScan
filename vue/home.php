@@ -11,7 +11,7 @@
     <title>Profil - ThermiScan</title>
   </head>
   <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-info">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/">ThermiScan</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -21,13 +21,11 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Gestion de vidéo
+          Gestion caméra
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" data-toggle="modal" data-target="#addVideo" href="#">Ajouter une vidéo</a>
+          <a class="dropdown-item" data-toggle="modal" data-target="#addVideo" href="#">Ajouter une caméra</a>
           <a class="dropdown-item" data-toggle="modal" data-target="#changeCamera" href="#">Changer de caméra</a>
-          <a class="dropdown-item" data-toggle="modal" data-target="#changeVideo" href="#">Changer de vidéo</a>
-          <a class="dropdown-item" href="#">Supprimer</a>
         </div>
       </li>
     </ul>
@@ -47,33 +45,29 @@
     </form>
   </div>
 </nav>
-<br>
 <div class="container-fluid">
-<div class="row">
-  <div class="col-md-2" style="background-color: #cccccc">
-    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-      <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-    </div>
-    <div class="tab-content" id="v-pills-tabContent">
-      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
-      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-      <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
-    </div>
-  </div>
-  <div class="col">
-  <!-- Video content with the graph and the options -->
   <div class="row">
-    <div class="col bg-danger">
-    image
+    <div class="col-md-2" style="padding-left:0px;">
+        <!-- Content -->
+        <form>
+          <div class="list-group">
+            <button type="button" class="list-group-item list-group-item-action active">
+              Cras justo odio
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button>
+            <button type="button" class="list-group-item list-group-item-action">Morbi leo risus</button>
+            <button type="button" class="list-group-item list-group-item-action">Porta ac consectetur ac</button>
+            <button type="button" class="list-group-item list-group-item-action" disabled>Vestibulum at eros</button>
+          </div>
+        </form>
+      </div>
+    <!-- Video content with the graph and the options -->
+    <div class="col-md-5 ">
+    <img src="https://logodix.com/logo/2121245.png" style="width=auto">
     </div>
     <!-- 16:9 aspect ratio -->
-    <div class="col bg-success">
-      graph
-    </div>
+    <div class="col-md-5" >
+    <img src="graph.png" style="width=auto">
     </div>
     </div>
   </div>
