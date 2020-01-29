@@ -24,13 +24,11 @@
         </div>
         <!-- Video content with the graph and the options -->
         <div class="col-md-5 ">
-            <img src="https://logodix.com/logo/2121245.png" style="width=auto">
+            <img src="https://logodix.com/logo/2121245.png" style="width:auto">
         </div>
         <!-- 16:9 aspect ratio -->
         <div class="col-md-5">
-            <img src="img/graph.png" style="width=auto">
+            <img src="img/graph.png" style="width:auto">
         </div>
     </div>
 </div>
-</div>
---------------------------------------------------------------------------------------------------------------------------------------------------------
