@@ -10,9 +10,8 @@
 class User {
 
     public $username;
-    public $email;
     public $idUser;
-    public $role;
+
 
     public function __construct($username, $idUser) {
         $this->username = $username;
@@ -23,9 +22,28 @@ class User {
         return $this->username;
     }
 
-    public function GetId() {
+    public function GetIdUser() {
         return $this->idUser;
     }
+
+    public function GetListOfCameraUser()
+    {
+    $resultat = ($_SESSION['Pdo']->Select("*", "camera", 'IdUser= '.$this->idUser.'' ,""));
+        return $resultat;
+    }
+
+    public function GetListOfVideo()
+    {
+    $resultat = ($_SESSION['Pdo']->Select("*", "video", 'IdUser= '.$this->idUser.'' ,""));
+        return $resultat;
+    }
+
+    public function GetListOfVideoByCamera($idCamera)
+    {
+    $resultat = ($_SESSION['Pdo']->Select("*", "video", 'IdUser= '.$this->idUser.'AND idCamera = '.$idCamera.'' ,""));
+        return $resultat;
+    }
+    
 
 }
 

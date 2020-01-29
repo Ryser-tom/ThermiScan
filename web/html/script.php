@@ -8,10 +8,14 @@
  * description: script de connexion au site
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 include "../class/Pdo.php";
+include "../class/User.php";
  session_start();
 
 $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
+$camera = filter_input(INPUT_POST, 'camera', FILTER_SANITIZE_STRING);
 $fichier = basename($_FILES['video']['name']);
+$user = $_SESSION['user']->GetidUser();
+echo $date;
 
 if ($nom != "") {
     
@@ -27,13 +31,13 @@ if ($extension == "mp4" or $extension == "wave" or $extension == "jpg") {
 
     if (move_uploaded_file($_FILES['video']['tmp_name'], $dossier . "")) {//Si la fonction renvoie TRUE, c'est que ça a fonctionné...
         echo 'Upload effectué avec succès !';
-
-        //$_SESSION['requete']->Execute("INSERT INTO jeu (nom_jeu,nom_photo) VALUES ('$nom','$newName')");
-        //header('Location: ../ajoutJeu.php?erreur=18');
-        echo"au top";
+        
+        $_SESSION['Pdo']->Execute("INSERT INTO video (nomVideo,idCamera,IdUser) VALUES ('$nom','$camera','$user')");
+        header('Location: ../index.php');
+        //echo"au top";
         exit;
     } else { //Sinon (la fonction renvoie FALSE).
-        echo 'Echec de l\'upload !';
+        echo 'Echec de l\'upload !</br';
         //header('Location: ../ajoutJeu.php?erreur=19');
         echo"fuck";
         exit;

@@ -16,17 +16,16 @@ $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
 
 if (strlen($password) < 5) {
     //header('Location: ../index.php?erreur=1');
-    echo"mots de passe trop court";
+    echo "mots de passe trop court";
     exit;
 }
 
-requete Pdo = new Pdo();
-pdo.Select("username", "users", 'username="' . $username . '"', "");
+
 
 $resultat = ($_SESSION['Pdo']->Select("username", "users", 'username="' . $username . '"', ""));
-if (isset($resultat[0]) == !null) {//verification si le nom d'utilisateur n'est pas deja pris
+if (isset($resultat[0]) == !null) { //verification si le nom d'utilisateur n'est pas deja pris
     //header('Location: ../index.php?erreur=5');
-    echo"username deja pris";
+    echo "username deja pris";
     exit;
 }
 
@@ -34,11 +33,11 @@ if ($password1 == $password2) {
     //valide l'inscription
     $_SESSION['Pdo']->Execute("INSERT INTO users (password,username) VALUES ('$password1','$username')");
     //header('Location: ../index.php?erreur=3');
-    echo"au top";
+    echo "au top";
     exit;
 } else {
     //les mots de passe ne coresponde pas
     //header('Location: ../index.php?erreur=4');
-    echo"frere tu sais pas copier";
+    echo "frere tu sais pas copier";
     exit;
 }
