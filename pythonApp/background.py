@@ -1,14 +1,20 @@
-import logging # To create easy log file
-import time # For the time.sleep
-import image # For the image script
+import logging  # To create easy log file
+import time  # For the time.sleep
+import image  # For the image script
+#import extract  # For the video script
 
+import pytesseract as pyt
 # For the file detection, It doesn't work on 64-bit
-from watchdog.observers import Observer 
+from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 # configuration for the logging function
 # filemode='a' is for append
-logging.basicConfig(filename='\\testPython/app.log', filemode='a', format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+logging.basicConfig(filename='\\testPython//app.log',
+                    filemode='a',
+                    format='%(asctime)s - %(message)s',
+                    datefmt='%d-%b-%y %H:%M:%S')
+
 
 #class that wait for an event, when it get's an event it call the Handler class and give him the event
 class Watcher:
@@ -20,7 +26,9 @@ class Watcher:
 
     def run(self):
         event_handler = Handler()
-        self.observer.schedule(event_handler, self.DIRECTORY_TO_WATCH, recursive=True)
+        self.observer.schedule(event_handler,
+                               self.DIRECTORY_TO_WATCH,
+                               recursive=True)
         self.observer.start()
         try:
             while True:
@@ -31,16 +39,16 @@ class Watcher:
 
         self.observer.join()
 
+
 #called if an event occured
 class Handler(FileSystemEventHandler):
-
     @staticmethod
     def on_any_event(event):
         if event.is_directory:
             return None
 
         elif event.event_type == 'created':
-            image.init(event.src_path)
+            image.read_break_image(event.src_path)
             logging.warning('The file at %s has been added' % event.src_path)
 
 
