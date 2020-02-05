@@ -1,8 +1,13 @@
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-<div id="chartdiv"></div>
 
+<!-- Load c3.css -->
+<link href="c3/c3.css" rel="stylesheet">
+
+<!-- Load d3.js and c3.js -->
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="c3/c3.min.js"></script>
 <style>
     body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -13,6 +18,10 @@
         height: 500px;
     }
 </style>
+
+<body>
+    <div id="chart"></div>
+</body>
 
 <script>
     function CSVToArray(strData, strDelimiter) {
@@ -110,74 +119,49 @@
         }
         return result;
     }
-    /**
-     * ---------------------------------------
-     * This demo was created using amCharts 4.
-     * 
-     * For more information visit:
-     * https://www.amcharts.com/
-     * 
-     * Documentation is available at:
-     * https://www.amcharts.com/docs/v4/
-     * ---------------------------------------
-     */
 
-    // Themes begin
-    am4core.useTheme(am4themes_animated);
-    // Themes end
 
     // Create chart instance
-    var chart = am4core.create("chartdiv", am4charts.XYChart);
 
-    //
 
     // Increase contrast by taking evey second color
-    chart.colors.step = 2;
+
     lol = loadFile("value.csv");
+
     // Add data
-    chart.data = CSVToArray(lol, '');
+    var chart = CSVToArray(lol, ';');
 
+
+    var counter = 1;
+    var data1 = ['lol'];
+    var data2 = ["lol1"];
+    var data3 = ["lol2"];
+    var data4 = ["lol3"];
+    var temp_value;
+    chart.forEach(element => {
+
+        console.log(element[1]);
+        temp_value = element[1];
+        data1[counter] = temp_value;
+
+        data2[counter] = element[1];
+
+        data3[counter] = element[2];
+
+        data4[counter] = element[3];
+        counter++;
+    });
+    console.log(data1);
     // Create axes
-    var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-    dateAxis.renderer.minGridDistance = 50;
 
-    // Create series
-    function createAxisAndSeries(field, name, opposite) {
-        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-        if (chart.yAxes.indexOf(valueAxis) != 0) {
-            valueAxis.syncWithAxis = chart.yAxes.getIndex(0);
+    var chart2 = c3.generate({
+        bindto: '#chart',
+        data: {
+            columns: [
+                data1,
+                data2
+            ]
         }
-
-        var series = chart.series.push(new am4charts.LineSeries());
-        series.dataFields.valueY = field;
-        series.dataFields.dateX = "frame";
-        series.strokeWidth = 2;
-        series.yAxis = valueAxis;
-        series.name = name;
-        series.tooltipText = "{name}: [bold]{valueY}[/]";
-        series.tensionX = 0.8;
-        series.showOnInit = true;
-
-        var interfaceColors = new am4core.InterfaceColorSet();
-
-
-
-        valueAxis.renderer.line.strokeOpacity = 1;
-        valueAxis.renderer.line.strokeWidth = 2;
-        valueAxis.renderer.line.stroke = series.stroke;
-        valueAxis.renderer.labels.template.fill = series.stroke;
-        valueAxis.renderer.opposite = opposite;
-    }
-
-    createAxisAndSeries("min", "min", false);
-    createAxisAndSeries("moy", "moy", true);
-    createAxisAndSeries("max", "max", true);
-
-    // Add legend
-    chart.legend = new am4charts.Legend();
-
-    // Add cursor
-    chart.cursor = new am4charts.XYCursor();
-
-    // generate some random data, quite different range
+    });
+    generate(chart2);
 </script>
