@@ -142,13 +142,13 @@
 
         console.log(element[1]);
         temp_value = element[1];
-        data1[counter] = temp_value;
+        data1[counter] = parseFloat(element[0]);
 
-        data2[counter] = element[1];
+        data2[counter] = parseFloat(element[1]);
 
-        data3[counter] = element[2];
+        data3[counter] = parseFloat(element[2]);
 
-        data4[counter] = element[3];
+        data4[counter] = parseFloat(element[3]);
         counter++;
     });
     console.log(data1);
@@ -158,8 +158,9 @@
         bindto: '#chart',
         data: {
             columns: [
-                data1,
-                data2
+                data2,
+                data3,
+                data4
             ]
         }
     });
