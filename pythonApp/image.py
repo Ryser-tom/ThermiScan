@@ -10,7 +10,7 @@ import pytesseract as pyt
 pyt.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\Tesseract.exe'
 regex = r"\d+\,\d+"
 
-def read_break_image(frame, image):
+def read_break_image(frame, image, folderSource):
     #print(file_name, 'start of treatment')
     #image = cv2.imread('capture.png')
     #text=pyt.image_to_string(image)
@@ -37,12 +37,13 @@ def read_break_image(frame, image):
 
     cv2.imwrite('out.png', img_to_read)
     text = pyt.image_to_string(img_to_read)
-    write_csv(text, frame)
+    write_csv(text, frame, folderSource)
 
 
-def write_csv(row, frame):
-    with open('value.csv', 'a', newline='') as outfile:
-        writer = csv.writer(outfile, quoting = csv.QUOTE_NONNUMERIC)
+def write_csv(row, frame, folderSource):
+    with open(folderSource + '/value.csv', 'a', newline='') as outfile:
+        writer = csv.writer(outfile,  delimiter=';',
+                            quotechar=' ', quoting = csv.QUOTE_NONNUMERIC)
         #data_writer.writerow(['Min', 'Moy', 'Max'])
         
         matches = re.findall("\d+\,\d+", row)
