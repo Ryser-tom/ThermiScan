@@ -12,6 +12,7 @@ if (isset($_GET['video'])) {
 }
 ?>
 <div class="container-fluid">
+    </br>
     <div class="row">
         <div class="col-md-2" style="padding-left:0px;">
             <!-- Content -->

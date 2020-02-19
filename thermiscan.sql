@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 22 Janvier 2020 à 13:32
+-- Généré le :  Mer 19 Février 2020 à 15:26
 -- Version du serveur :  5.6.15-log
 -- Version de PHP :  5.5.8
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `camera` (
   `nomCamera` varchar(100) NOT NULL,
   `IdUser` int(11) NOT NULL,
   PRIMARY KEY (`idCamera`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf16 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf16 AUTO_INCREMENT=14 ;
 
 --
 -- Contenu de la table `camera`
@@ -43,7 +43,9 @@ INSERT INTO `camera` (`idCamera`, `nomCamera`, `IdUser`) VALUES
 (7, 'camera num 4', 2),
 (6, 'camera num 1', 2),
 (10, 'camera lorenzo 3', 1),
-(11, 'camera lorenzo 4', 1);
+(11, 'camera lorenzo 4', 1),
+(12, 'camera kevin 1', 3),
+(13, 'camera num 2 kevin', 3);
 
 -- --------------------------------------------------------
 
@@ -56,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`IdUser`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf16 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf16 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `users`
@@ -64,7 +66,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`IdUser`, `username`, `password`) VALUES
 (1, 'lorenzo', '8451ba8a14d79753d34cb33b51ba46b4b025eb81'),
-(2, 'lorenzo1', '8451ba8a14d79753d34cb33b51ba46b4b025eb81');
+(2, 'lorenzo1', '8451ba8a14d79753d34cb33b51ba46b4b025eb81'),
+(3, 'kevin', '8451ba8a14d79753d34cb33b51ba46b4b025eb81');
 
 -- --------------------------------------------------------
 
@@ -76,21 +79,19 @@ CREATE TABLE IF NOT EXISTS `video` (
   `idVideo` int(11) NOT NULL AUTO_INCREMENT,
   `dateVideo` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `nomVideo` varchar(100) NOT NULL,
+  `nomDossier` varchar(100) NOT NULL,
   `IdCamera` int(11) NOT NULL,
   `Iduser` int(11) NOT NULL,
   PRIMARY KEY (`idVideo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf16 AUTO_INCREMENT=16 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf16 AUTO_INCREMENT=23 ;
 
 --
 -- Contenu de la table `video`
 --
 
-INSERT INTO `video` (`idVideo`, `dateVideo`, `nomVideo`, `IdCamera`, `Iduser`) VALUES
-(7, '0000-00-00 00:00:00', 'test2', 9, 0),
-(12, '2020-01-15 15:33:02', 'test3', 8, 0),
-(13, '2020-01-15 15:34:17', 'test video', 11, 0),
-(14, '2020-01-15 15:45:12', 'zjjzt', 9, 1),
-(15, '2020-01-15 15:59:42', 'video de test', 9, 1);
+INSERT INTO `video` (`idVideo`, `dateVideo`, `nomVideo`, `nomDossier`, `IdCamera`, `Iduser`) VALUES
+(22, '2020-02-19 15:01:08', 'test2', '77be23236533eae538668ec5d257526f6260b7e3', 7, 2),
+(21, '2020-02-19 14:13:18', 'wadddadda', '499b981de8855a6c99921e353ad5dd61dd201713', 7, 2);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
