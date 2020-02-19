@@ -1,7 +1,7 @@
 # Importing all necessary libraries
 import cv2
 import os
-
+import shutil
 import image
 # Read the video from specified path
 cam = cv2.VideoCapture("..//video//vidTest.mp4")
@@ -42,4 +42,4 @@ while (True):
 # Release all space and windows once done
 cam.release()
 cv2.destroyAllWindows()
-os.rmdir('data')
+shutil.rmtree('data')

@@ -42,7 +42,8 @@ def read_break_image(frame, image):
 
 def write_csv(row, frame):
     with open('value.csv', 'a', newline='') as outfile:
-        writer = csv.writer(outfile, quoting = csv.QUOTE_NONNUMERIC)
+        writer = csv.writer(outfile,  delimiter=';',
+                            quotechar=' ', quoting = csv.QUOTE_NONNUMERIC)
         #data_writer.writerow(['Min', 'Moy', 'Max'])
         
         matches = re.findall("\d+\,\d+", row)
