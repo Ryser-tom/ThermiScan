@@ -1,6 +1,7 @@
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="../class/graph.js"></script>
 
 <!-- Load c3.css -->
 <link href="c3/c3.css" rel="stylesheet">
@@ -8,16 +9,7 @@
 <!-- Load d3.js and c3.js -->
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="c3/c3.min.js"></script>
-<style>
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    }
 
-    #chartdiv {
-        width: 100%;
-        height: 500px;
-    }
-</style>
 
 <body>
     <div id="chart"></div>
@@ -121,48 +113,40 @@
     }
 
 
-    // Create chart instance
+    data = loadFile("value.csv");
+    if (data != null) {
+        // Add data
+        var chart = CSVToArray(data, ';');
 
+        var counter = 1;
+        var data1 = ['data'];
+        var data2 = ["min"];
+        var data3 = ["moy"];
+        var data4 = ["max"];
+        var temp_value;
+        chart.forEach(element => {
 
-    // Increase contrast by taking evey second color
+            data1[counter] = parseFloat(element[0].split(",").join("."));
 
-    lol = loadFile("value.csv");
+            data2[counter] = parseFloat(element[1].split(",").join("."));
 
-    // Add data
-    var chart = CSVToArray(lol, ';');
+            data3[counter] = parseFloat(element[2].split(",").join("."));
 
+            data4[counter] = parseFloat(element[3].split(",").join("."));
+            counter++;
+        });
+        console.log(data1);
+        // Create axes
 
-    var counter = 1;
-    var data1 = ['lol'];
-    var data2 = ["lol1"];
-    var data3 = ["lol2"];
-    var data4 = ["lol3"];
-    var temp_value;
-    chart.forEach(element => {
-
-        console.log(element[1]);
-        temp_value = element[1];
-        data1[counter] = parseFloat(element[0]);
-
-        data2[counter] = parseFloat(element[1]);
-
-        data3[counter] = parseFloat(element[2]);
-
-        data4[counter] = parseFloat(element[3]);
-        counter++;
-    });
-    console.log(data1);
-    // Create axes
-
-    var chart2 = c3.generate({
-        bindto: '#chart',
-        data: {
-            columns: [
-                data2,
-                data3,
-                data4
-            ]
-        }
-    });
-    generate(chart2);
+        var chart2 = c3.generate({
+            bindto: '#chart',
+            data: {
+                columns: [
+                    data2,
+                    data3,
+                    data4
+                ]
+            }
+        });
+    }
 </script>

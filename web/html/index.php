@@ -7,7 +7,9 @@
  * Date    : 18.12.2019
  * description: script de connexion au site
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
+if (isset($_GET['video'])) {
+    $video =  GetInfosVideo($_GET['video']);
+}
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -24,11 +26,24 @@
         </div>
         <!-- Video content with the graph and the options -->
         <div class="col-md-5 ">
-            <img src="https://logodix.com/logo/2121245.png" style="width:auto">
+            <video width="auto" height="auto" controls="controls">
+                <?php
+                echo "<source src=file/done/" . $video[0]['nomDossier'] . "/video.mp4 type=\"video/mp4\" />";
+                ?>
+                <source src="video.mp4" type="video/mp4" />
+                Ici l'alternative à la vidéo : un lien de téléchargement, un message, etc.
+            </video>
         </div>
         <!-- 16:9 aspect ratio -->
         <div class="col-md-5">
-            <img src="img/graph.png" style="width:auto">
+            <div id="chart"></div>
         </div>
     </div>
 </div>
+<?php
+if (isset($_GET['video'])) {
+    echo "<script>
+var folder = \"" . $video[0]['nomDossier'] . "\";
+</script>";
+}
+?>

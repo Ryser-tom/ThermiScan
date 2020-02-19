@@ -7,7 +7,7 @@ function GetListOfvideoCameraVue()
 
         foreach ($video as $key => $value) {
 
-            echo '<button type="button" class="list-group-item list-group-item-action">' . $video[$key]['nomVideo'] . '</button>';
+            echo '<a href="index.php?video=' . $video[$key]['idVideo'] . '"<button type="button" class="list-group-item list-group-item-action">' . $video[$key]['nomVideo'] . '</button></a>';
         }
     }
 }
@@ -34,4 +34,9 @@ function GetListOfCameraUserVue()
             echo ('<option value="' . $result[$key]['idCamera'] . '">' . $result[$key]['nomCamera'] . '</a>');
         }
     }
+}
+function GetInfosVideo($videoId)
+{
+    $resultat = ($_SESSION['Pdo']->Select("*", "video", 'IdVideo= ' . $videoId . '', ""));
+    return $resultat;
 }
