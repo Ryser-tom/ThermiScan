@@ -4,6 +4,7 @@ import extract  # For the image script
 #import extract  # For the video script
 import threading
 
+import csv
 import shutil
 import pytesseract as pyt
 # For the file detection, It doesn't work on 64-bit
@@ -12,7 +13,7 @@ from watchdog.events import FileSystemEventHandler
 
 # configuration for the logging function
 # filemode='a' is for append
-logging.basicConfig(filename='\\testPython//app.log',
+logging.basicConfig(filename='app.log',
                     filemode='a',
                     format='%(asctime)s - %(message)s',
                     datefmt='%d-%b-%y %H:%M:%S')
@@ -65,6 +66,12 @@ class Handler(FileSystemEventHandler):
             extract.extractFrames(event.src_path, source)
             logging.warning('The file at %s has been added' % event.src_path)
             print('the CSV is done.')
+            f = open(source + '/value.csv', "r+w")
+            lines=f.readlines()
+            lines=lines[:-1]
+            cWriter = csv.writer(f, delimiter=';')
+            for line in lines:
+                cWriter.writerow(line)
             try:
                 shutil.move(source, destination)
                 print('The folder as been moved.')
