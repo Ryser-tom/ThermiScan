@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body">
         <!-- Content -->
-        <form method="POST" action="html/script.php" enctype="multipart/form-data">
+        <form method="POST" action="../web/class/script.php" enctype="multipart/form-data">
           <div class="form-group row justify-content-between">
             <label for="exampleFormControlSelect1">Caméra</label>
             <select class="form-control" name="camera">
@@ -22,11 +22,11 @@
           <div class="form-group row justify-content-between">
             <label for="videoName" class="col-sm-4 col-form-label">Nom de la vidéo</label>
             <div class="col-sm-6">
-              <input class="form-control" type="text" name="nom" placeholder="ex. Salon 1" />
+              <input class="form-control" type="text" name="nom" placeholder="ex. Salon 1" required />
             </div>
           </div>
           <div class="custom-file">
-            <input type="file" class="custom-file-input" name="video" lang="fr" />
+            <input type="file" class="custom-file-input" name="video" lang="fr" required />
             <label class="custom-file-label custom-file-text" for="customFile">Choisir un fichier</label>
           </div>
       </div>
@@ -49,13 +49,12 @@
       </div>
       <div class="modal-body">
         <!-- Content -->
-        <form>
-          <div class="list-group" id="list-tab" role="tablist">
-            <?php
-            GetListOfCameraVue();
-            ?>
-          </div>
-        </form>
+        <div class="list-group" id="list-tab" role="tablist">
+          <a class="list-group-item list-group-item-action" href="index.php?camera=0" role="tab">Toutes les camera</a>
+          <?php
+          GetListOfCameraVue();
+          ?>
+        </div>
       </div>
       <!-- Close or save changes -->
       <div class="modal-footer">
@@ -79,14 +78,14 @@
       </div>
       <div class="modal-body">
         <!-- Content -->
-        <form method="POST" action="html/connexion.php">
+        <form method="POST" action="../web/class/connexion.php">
           <div class="form-group">
             <label for="username">Pseudo</label>
-            <input type="text" class="form-control" name="username" placeholder="Pseudo">
+            <input type="text" class="form-control" name="username" placeholder="Pseudo" required>
           </div>
           <div class="form-group">
             <label for="password">Mot de passe</label>
-            <input type="password" class="form-control" name="password" placeholder="Mot de passe">
+            <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
           </div>
 
           <!-- Close or save changes -->
@@ -111,18 +110,18 @@
       </div>
       <div class="modal-body">
         <!-- Content -->
-        <form method="POST" action="html/inscription.php">
+        <form method="POST" action="../web/class/inscription.php">
           <div class="form-group">
             <label for="username">Pseudo</label>
-            <input type="text" class="form-control" name="username" placeholder="ex: Didierdu74">
+            <input type="text" class="form-control" name="username" placeholder="ex: Didierdu74" required>
           </div>
           <div class="form-group">
             <label for="password">Mot de passe</label>
-            <input type="password" class="form-control" name="password1" placeholder="ex: 12345678">
+            <input type="password" class="form-control" name="password1" placeholder="ex: 12345678" required>
           </div>
           <div class="form-group">
             <label for="confirmPassword">Confirmer le mot de passe</label>
-            <input type="password" class="form-control" name="password2" placeholder="ex: 12345678">
+            <input type="password" class="form-control" name="password2" placeholder="ex: 12345678" required>
           </div>
           <!-- Close or save changes -->
       </div>
@@ -146,10 +145,10 @@
       </div>
       <div class="modal-body">
         <!-- Content -->
-        <form method="POST" action="html/newCamera.php">
+        <form method="POST" action="../web/class/newCamera.php">
           <div class="form-group">
             <label for="nameCamera">nom caméra</label>
-            <input type="text" class="form-control" name="nameCamera" placeholder="Pseudo">
+            <input type="text" class="form-control" name="nameCamera" placeholder="Nom camera" required>
           </div>
 
           <!-- Close or save changes -->

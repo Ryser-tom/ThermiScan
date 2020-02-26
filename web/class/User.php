@@ -40,11 +40,9 @@ class User {
 
     public function GetListOfVideoByCamera($idCamera)
     {
-    $resultat = ($_SESSION['Pdo']->Select("*", "video", 'IdUser= '.$this->idUser.'AND idCamera = '.$idCamera.'' ,""));
+    $resultat = ($_SESSION['Pdo']->Select("*", "video", 'IdUser= '.$this->idUser.' AND idCamera = '.$idCamera.'' ,""));
         return $resultat;
     }
     
 
 }
-
-?>
