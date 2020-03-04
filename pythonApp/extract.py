@@ -43,5 +43,6 @@ def extractFrames(path, folderSource):
             break
 
     # Release all space and windows once done
+    print('extract done')
     cam.release()
     cv2.destroyAllWindows()

@@ -26,6 +26,7 @@ class Watcher:
     #DIRECTORY_TO_WATCH = 'C:/Users/ryser/Documents/ThermiScan/web/file/toDo'
     def __init__(self):
         self.observer = Observer()
+        pass
 
     def run(self):
         event_handler = Handler()
@@ -40,43 +41,46 @@ class Watcher:
             self.observer.stop()
             print("Error")
 
-        self.observer.join()
+        #self.observer.join()
 
 
 #called if an event occured
 class Handler(FileSystemEventHandler):
     @staticmethod
     def on_any_event(event):
-        print('event type: ' + event.event_type + 'and is a directory' + str(event.is_directory))
+        global folderName
 
-        if event.event_type == 'created' and event.is_directory:
+        if event.event_type == 'created' and event.is_directory == False:
             path = event.src_path.split('/')
             path2 = path[3].split('\\')
             source = path[0] + "/" + path[1] + "/" + path[2] + "/" + path2[0] + "/" + path2[1]
             destination = path[0] + "/" + path[1] + "/" + path[2] + "/" + "done"
-            #print(path2)
-            print(source)
+            
+            if path2[-1] == 'video.mp4' and folderName != path2[-2]:
+                folderName = path2[-2]
+                print('event type: ' + event.event_type + ' and is a directory: ' + str(event.is_directory) + ' name is: ' + path2[-1] + ' source is :' + folderName)
 
-            thread = threading.Thread(target=extract.extractFrames(event.src_path, source))
-            thread.start()
+                thread = threading.Thread(target=extract.extractFrames(event.src_path, source))
+                thread.start()
 
-            # wait here for the result to be available before continuing
-            thread.join()
-            logging.warning('The file at %s has been added' % event.src_path)
+                # wait here for the result to be available before continuing
+                thread.join()
+                logging.warning('The file at %s has been added' % event.src_path)
 
 
 
-            try:
-                shutil.move(source, destination)
-                print('The folder as been moved.')
-            except:
-                pass
-                #print("An exception occurred, cannot move folder")
+                try:
+                    shutil.move(source, destination)
+                    print('The folder as been moved.')
+                except:
+                    pass
+                    #print("An exception occurred, cannot move folder")
             
             
 
 
 if __name__ == '__main__':
+    folderName = ''
     scriptDirectory = os.path.dirname(os.path.realpath(__file__))
     print('start: ' + scriptDirectory)
     w = Watcher()
