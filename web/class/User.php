@@ -2,9 +2,9 @@
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Auteur  : Lorenzo Bauduccio
- * Classe  : Ida P4B
+ * Classe  : Tech 1
  * Version : 1.0
- * Date    : 08.05.2019
+ * Date    : 04.03.2020
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 class User {
@@ -17,7 +17,7 @@ class User {
         $this->username = $username;
         $this->idUser = $idUser;
     }
-	//reoutre le nom d'utilisateur de l'utilisateur
+	//retourne le nom d'utilisateur de l'utilisateur
     public function GetUsername() {
         return $this->username;
     }
@@ -25,7 +25,7 @@ class User {
     public function GetIdUser() {
         return $this->idUser;
     }
-	//retourne la liste des camera de l'utilisateur
+	//retourne la liste des cameras de l'utilisateur
     public function GetListOfCameraUser()
     {
     $resultat = ($_SESSION['Pdo']->Select("*", "camera", 'IdUser= '.$this->idUser.'' ,""));
@@ -37,7 +37,7 @@ class User {
     $resultat = ($_SESSION['Pdo']->Select("*", "video", 'IdUser= '.$this->idUser.'' ,""));
         return $resultat;
     }
-	//retourne la liste de video liée a une camera
+	//retourne la liste de video liee a une camera
     public function GetListOfVideoByCamera($idCamera)
     {
     $resultat = ($_SESSION['Pdo']->Select("*", "video", 'IdUser= '.$this->idUser.' AND idCamera = '.$idCamera.'' ,""));

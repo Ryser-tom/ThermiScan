@@ -2,9 +2,9 @@
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Auteur  : Lorenzo Bauduccio
- * Classe  : Ida P4B
+ * Classe  : Tech 1
  * Version : 1.0
- * Date    : 07.05.2019
+ * Date    : 18.12.2019
  * description: class permetant d'executer des requetes
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -29,7 +29,7 @@ class Requete {
         return $db;
     }
 
-//Permet d’exécuter un select de façon simple
+//Permet d’executer un select de façon simple
     public function Select($select, $from, $where, $order) {// select
         $connexion = $this->CreateConnexion();
         if ($order == "") {
@@ -55,27 +55,27 @@ class Requete {
         }
     }
 
-//Permet d’exécuter un delete de façon simplifier
+//Permet d’executer un delete de façon simplifier
     public function Delete($from, $where) {// Delete
         $connexion = $this->CreateConnexion();
         $reponse = $connexion->query('DELETE FROM ' . $from . ' WHERE ' . $where . '');
         $reponse->execute();
     }
 
-//Permet d’exécuter un update de façon simplifier
+//Permet d’executer un update de façon simplifier
     public function Update($from, $set, $where) {
         $connexion = $this->CreateConnexion();
         $requete = $connexion->prepare('UPDATE ' . $from . ' SET ' . $set . ' WHERE ' . $where . '');
         $requete->execute();
     }
 
-//Exécute la requête SQL passer en paramètre
+//Execute la requete SQL passer en paramètre
     public function Execute($requete) {
         $connexion = $this->CreateConnexion();
         $connexion->query($requete);
     }
 
-//Retourne le résultat de la requête passer en paramètre
+//Retourne le resultat de la requete passer en parametre
     public function SelectFull($select) {// select
         $connexion = $this->CreateConnexion();
         $reponse = $connexion->query('' . $select . '', PDO::FETCH_ASSOC);

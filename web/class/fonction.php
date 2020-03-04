@@ -4,9 +4,10 @@
  * Classe  : Tech 1
  * Version : 1.0
  * Date    : 26.02.2020
- * description: liste de fontions pour l'affichage
+ * description: liste de fonctions pour l'affichage
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-//retourne sous forme de lien toutes les video en lien avec une camera ou toutes les video
+
+//retourne sous forme de lien toutes les videos en lien avec une camera ou toutes les videos
 function GetListOfvideoCameraVue($idCamera)
 {
 
@@ -22,7 +23,7 @@ function GetListOfvideoCameraVue($idCamera)
         }
     }
 }
-//retourne la liste des camera sous forme de lien
+//retourne la liste des cameras sous forme de lien
 function GetListOfCameraVue()
 {
     if (isset($_SESSION['user'])) {
@@ -34,7 +35,7 @@ function GetListOfCameraVue()
         echo '<a class="list-group-item list-group-item-action"   >Pas de camera disponible</a>';
     }
 }
-//retourne la liste des camera sous forme d'option pour formulaire
+//retourne la liste des cameras sous forme d'option pour formulaire
 function GetListOfCameraUserVue()
 {
     if (isset($_SESSION['user'])) {

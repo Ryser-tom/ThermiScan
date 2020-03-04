@@ -1,7 +1,7 @@
 <?php
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Auteur  : Lorenzo Bauduccio
- * Classe  : Ida P4B
+ * Classe  : Tech 1
  * Version : 1.0
  * Date    : 04.03.2020
  * description: script qui se lance au debut de chaque page

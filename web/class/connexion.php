@@ -2,9 +2,9 @@
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Auteur  : Lorenzo Bauduccio
- * Classe  : Ida P4B
+ * Classe  : Tech 1
  * Version : 1.0
- * Date    : 07.05.2019
+ * Date    : 04.03.2019
  * description: script de connexion au site
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 include "../class/Pdo.php";
@@ -15,7 +15,7 @@ $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
 $password = sha1(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING));
 
 $resultat = ($_SESSION['Pdo']->Select("*", "users", 'username="' . $username . '" AND password = "' . $password . '"', ""));
-//verifie que le nom d'utilisateur et le mot de passe correspond
+//verifie que le nom d'utilisateur et le mot de passe correspondent
 if (($username == $resultat[0]['username']) and $password == $resultat[0]['password']) {
     $username = $resultat[0]['username'];
     $id = $resultat[0]['IdUser'];
