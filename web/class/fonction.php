@@ -4,8 +4,9 @@
  * Classe  : Tech 1
  * Version : 1.0
  * Date    : 26.02.2020
- * description: liste de fontion pour l'affichage
+ * description: liste de fontions pour l'affichage
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+//retourne sous forme de lien toutes les video en lien avec une camera ou toutes les video
 function GetListOfvideoCameraVue($idCamera)
 {
 
@@ -21,7 +22,7 @@ function GetListOfvideoCameraVue($idCamera)
         }
     }
 }
-
+//retourne la liste des camera sous forme de lien
 function GetListOfCameraVue()
 {
     if (isset($_SESSION['user'])) {
@@ -33,7 +34,7 @@ function GetListOfCameraVue()
         echo '<a class="list-group-item list-group-item-action"   >Pas de camera disponible</a>';
     }
 }
-
+//retourne la liste des camera sous forme d'option pour formulaire
 function GetListOfCameraUserVue()
 {
     if (isset($_SESSION['user'])) {
@@ -44,14 +45,17 @@ function GetListOfCameraUserVue()
         }
     }
 }
+//retourne les informations d'une video
 function GetInfosVideo($videoId)
 {
     $resultat = ($_SESSION['Pdo']->Select("*", "video", 'IdVideo= ' . $videoId . '', ""));
     return $resultat;
 }
-
+//retourne une camera de l'utilisateur connecter
 function GetFirstCameraUser()
 {
     $camera = ($_SESSION['user']->GetListOfCameraUser());
-    return $camera[0]['idCamera'];
+    if (isset($camera[0]['idCamera'])) {
+        return $camera[0]['idCamera'];
+    }
 }

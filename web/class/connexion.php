@@ -15,7 +15,7 @@ $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
 $password = sha1(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING));
 
 $resultat = ($_SESSION['Pdo']->Select("*", "users", 'username="' . $username . '" AND password = "' . $password . '"', ""));
-
+//verifie que le nom d'utilisateur et le mot de passe correspond
 if (($username == $resultat[0]['username']) and $password == $resultat[0]['password']) {
     $username = $resultat[0]['username'];
     $id = $resultat[0]['IdUser'];
@@ -25,4 +25,3 @@ if (($username == $resultat[0]['username']) and $password == $resultat[0]['passw
 } else {
     header('Location: ../index.php');
 }
-?>

@@ -1,3 +1,11 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Auteur  : Lorenzo Bauduccio
+ * Classe  : Tech 1
+ * Version : 1.0
+ * Date    : 26.02.2020
+ * description: script dessinant le graphique
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 function CSVToArray(strData, strDelimiter) {
   // Check to see if the delimiter is defined. If not,
   // then default to comma.
@@ -64,7 +72,7 @@ function CSVToArray(strData, strDelimiter) {
   // Return the parsed data.
   return arrData;
 }
-
+//charge le ficher depuis le bon dossier
 function loadFile(filePath) {
   var result = null;
   var xmlhttp = new XMLHttpRequest();
@@ -77,6 +85,7 @@ function loadFile(filePath) {
 }
 
 data = loadFile("file/done/" + folder + "/value.csv");
+//verification si des donnees sont presente
 if (data != null) {
   // Add data
   var chart = CSVToArray(data, ";");
@@ -97,9 +106,8 @@ if (data != null) {
     data4[counter] = parseFloat(element[3].split(",").join("."));
     counter++;
   });
-  console.log(data1);
-  // Create axes
 
+  // Create axes
   var chart2 = c3.generate({
     bindto: "#chart",
     data: {
