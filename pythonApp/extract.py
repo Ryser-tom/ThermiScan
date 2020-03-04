@@ -1,11 +1,12 @@
 # Importing all necessary libraries
 import cv2
 import os
-import shutil
 import image
+import csv
 # Read the video from specified path
 path = "..//video//vidTest.mp4"
 def extractFrames(path, folderSource):
+    print('start extract.py')
     cam = cv2.VideoCapture(path)
     try:
         os.unlink('value.csv')

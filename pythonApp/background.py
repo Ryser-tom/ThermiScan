@@ -3,7 +3,7 @@ import time  # For the time.sleep
 import extract  # For the image script
 #import extract  # For the video script
 import threading
-
+import os
 import csv
 import shutil
 import pytesseract as pyt
@@ -23,7 +23,7 @@ logging.basicConfig(filename='app.log',
 class Watcher:
     # TODO change the directory to watch for the definitive directory
     DIRECTORY_TO_WATCH = "../web/file/toDo"
-
+    #DIRECTORY_TO_WATCH = 'C:/Users/ryser/Documents/ThermiScan/web/file/toDo'
     def __init__(self):
         self.observer = Observer()
 
@@ -47,15 +47,14 @@ class Watcher:
 class Handler(FileSystemEventHandler):
     @staticmethod
     def on_any_event(event):
-        if event.is_directory:
-            return None
+        print('event type: ' + event.event_type + 'and is a directory' + str(event.is_directory))
 
-        elif event.event_type == 'created':
+        if event.event_type == 'created' and event.is_directory:
             path = event.src_path.split('/')
             path2 = path[3].split('\\')
             source = path[0] + "/" + path[1] + "/" + path[2] + "/" + path2[0] + "/" + path2[1]
             destination = path[0] + "/" + path[1] + "/" + path[2] + "/" + "done"
-            print(path2)
+            #print(path2)
             print(source)
 
             thread = threading.Thread(target=extract.extractFrames(event.src_path, source))
@@ -63,22 +62,22 @@ class Handler(FileSystemEventHandler):
 
             # wait here for the result to be available before continuing
             thread.join()
-            extract.extractFrames(event.src_path, source)
             logging.warning('The file at %s has been added' % event.src_path)
-            print('the CSV is done.')
-            f = open(source + '/value.csv', "r+w")
-            lines=f.readlines()
-            lines=lines[:-1]
-            cWriter = csv.writer(f, delimiter=';')
-            for line in lines:
-                cWriter.writerow(line)
+
+
+
             try:
                 shutil.move(source, destination)
                 print('The folder as been moved.')
             except:
-                print("An exception occurred, cannot move folder")
+                pass
+                #print("An exception occurred, cannot move folder")
+            
+            
 
 
 if __name__ == '__main__':
+    scriptDirectory = os.path.dirname(os.path.realpath(__file__))
+    print('start: ' + scriptDirectory)
     w = Watcher()
     w.run()
