@@ -48,6 +48,7 @@ def write_csv(row, frame, folderSource):
         
         matches = re.findall("\d+\,\d+", row)
         if len(matches) == 3:
+
             writer.writerow([frame, matches[2], matches[0], matches[1]])
             #print(frame, 'OK')
         else:

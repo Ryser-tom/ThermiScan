@@ -96,16 +96,16 @@ if (data != null) {
   var data3 = ["moy"];
   var data4 = ["max"];
   var temp_value;
-  chart.forEach(element => {
-    data1[counter] = parseFloat(element[0].split(",").join("."));
+  for (let index = 0; index < chart.length - 1; index++) {
+    data1[counter] = parseFloat(chart[index][0].split(",").join("."));
 
-    data2[counter] = parseFloat(element[1].split(",").join("."));
+    data2[counter] = parseFloat(chart[index][1].split(",").join("."));
 
-    data3[counter] = parseFloat(element[2].split(",").join("."));
+    data3[counter] = parseFloat(chart[index][2].split(",").join("."));
 
-    data4[counter] = parseFloat(element[3].split(",").join("."));
+    data4[counter] = parseFloat(chart[index][3].split(",").join("."));
     counter++;
-  });
+  }
 
   // Create axes
   var chart2 = c3.generate({
