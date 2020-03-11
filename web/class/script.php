@@ -18,7 +18,7 @@ $user = $_SESSION['user']->GetidUser();
 //verification si le nom n'est pas vide
 if ($nom != "") {
 } else {
-    echo "nom vide";
+    echo "Nom vide";
     exit;
 }
 
@@ -29,14 +29,14 @@ if ($extension == "mp4" or $extension == "wave" or $extension == "jpg") {
     $folderName = (sha1(rand(1, 10000000)));
     mkdir("../file/todo/" . $folderName);
     $dossier = "../file/todo/" . $folderName . "/video." . $extension;
-    //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+    //Si la fonction renvoie TRUE, c'est que ça a fonctionne...
     if (move_uploaded_file($_FILES['video']['tmp_name'], $dossier . "")) {
-        //ajout la video a la base de données
+        //ajout la video a la base de donnees
         $_SESSION['Pdo']->Execute("INSERT INTO video (nomVideo,idCamera,IdUser,nomDossier) VALUES ('$nom','$camera','$user','$folderName')");
         header('Location: ../index.php');
         exit;
     } else { //Sinon (la fonction renvoie FALSE).
-        echo 'Echec de l\'upload !</br';
+        echo 'Échec de l\'upload !</br';
         exit;
     }
 }

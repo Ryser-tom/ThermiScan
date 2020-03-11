@@ -6,23 +6,12 @@ import numpy as np
 from PIL import Image
 import cv2
 import pytesseract as pyt
-#uncomment the next line to execute on Windows
+
+# Path to 
 pyt.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\Tesseract.exe'
 regex = r"\d+\,\d+"
 
 def read_break_image(frame, image, folderSource):
-    #print(file_name, 'start of treatment')
-    #image = cv2.imread('capture.png')
-    #text=pyt.image_to_string(image)
-    #print(text)
-    #write_csv(text)
-
-    #img style
-    #image = Image.open(file_name)
-    #cropped = image.crop((30, 0, 330, 170))
-
-    #CV2 style
-    #crop_img = image[170:330, 0:30]
     
     # Set minimum and max HSV values to display
     lower = np.array([0, 0, 250])#0,0,0
@@ -39,7 +28,7 @@ def read_break_image(frame, image, folderSource):
     text = pyt.image_to_string(img_to_read)
     write_csv(text, frame, folderSource)
 
-
+# function to write the data 
 def write_csv(row, frame, folderSource):
     with open(folderSource + '/value.csv', 'a', newline='') as outfile:
         writer = csv.writer(outfile,  delimiter=';',
