@@ -6,7 +6,8 @@ import numpy as np
 from PIL import Image
 import cv2
 import pytesseract as pyt
-#uncomment the next line to execute on Windows
+
+# Path to 
 pyt.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\Tesseract.exe'
 regex = r"\d+\,\d+"
 
@@ -27,7 +28,7 @@ def read_break_image(frame, image, folderSource):
     text = pyt.image_to_string(img_to_read)
     write_csv(text, frame, folderSource)
 
-
+# function to write the data 
 def write_csv(row, frame, folderSource):
     with open(folderSource + '/value.csv', 'a', newline='') as outfile:
         writer = csv.writer(outfile,  delimiter=';',
