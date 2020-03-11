@@ -14,7 +14,7 @@ if (isset($_SESSION['user'])) {
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#addVideo">Ajouter une video</a>
@@ -28,7 +28,7 @@ if (isset($_SESSION['user'])) {
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <div class="row justify-content-end">
-          <a class="nav-link" href="?deco=1">Déconnection</a>
+          <a class="nav-link navColor" href="?deco=1">Déconnection</a>
         </div>
       </form>
     </div>

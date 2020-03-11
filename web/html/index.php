@@ -22,7 +22,7 @@ if (isset($_SESSION['user'])) {
     <div class="container-fluid">
         </br>
         <div class="row">
-            <div class="col-md-3" style="padding-left:0px;">
+            <div class="col-md-2" style="padding-left:0px;">
                 <form>
                     <div class="list-group">
 

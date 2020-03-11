@@ -2,113 +2,110 @@
     Created on : 6 juin 2019
     Author     : lorenzo
 */
-body{
-    width:100%;
-    font-family: 'Roboto', sans-serif;
+body {
+  width: 100%;
+  font-family: "Roboto", sans-serif;
 }
-html{
-    width:100%;
-    font-family: 'Roboto', sans-serif;
+html {
+  width: 100%;
+  font-family: "Roboto", sans-serif;
 }
-main{
-    width: 100%;
-    background-color: eblue;
-    margin: auto;
+main {
+  width: 100%;
+  background-color: eblue;
+  margin: auto;
 }
-footer{
-    width:100%;
-    margin: auto;
-    font-size:11px;
-
+footer {
+  width: 100%;
+  margin: auto;
+  font-size: 11px;
 }
-.footerbody{
-    width: 100%;
-    background-color: #c40e20;
+.footerbody {
+  width: 100%;
+  background-color: #c40e20;
 }
- footer ul {
-    list-style-type: none;
-    padding-left: 0;
- 
+footer ul {
+  list-style-type: none;
+  padding-left: 0;
 }
-footer a{
-    color: grey;
-    text-decoration: none;
+footer a {
+  color: grey;
+  text-decoration: none;
 }
-.colorWhite{
-    color: white;
+.colorWhite {
+  color: white;
 }
-.colorGrey{
-    color: #838383;
+.colorGrey {
+  color: #838383;
 }
-.colorBlue{
-  color:  rgb(69, 137, 166) ;
+.colorBlue {
+  color: rgb(69, 137, 166);
 }
-.colorDarkred{
-    color: darkred;
+.colorDarkred {
+  color: darkred;
 }
-.darkRed{
-    background-color: darkred;
+.darkRed {
+  background-color: darkred;
 }
-.backBlue{
-   background-color:  rgb(69, 137, 166);
+.backBlue {
+  background-color: rgb(69, 137, 166);
 }
-.backGrey{
-    background-color: #212121;
+.backGrey {
+  background-color: #212121;
 }
-nav a{
-    width: auto;
-    display: inline-block;
-    font-size: 12px;
-    text-transform: uppercase;
-    color: #262626;
-    text-decoration: none;
-    cursor: pointer;
-    padding: 20px 20px;
-    font-weight: bold;
+nav a {
+  width: auto;
+  display: inline-block;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #262626;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 20px 20px;
+  font-weight: bold;
 }
-nav a:hover{
-    text-decoration: none;
-    color: #c40e20;
+nav a:hover {
+  text-decoration: none;
+  color: #c40e20;
 }
-.footerInfo{
-    background-color: red;
-    font-size: 10px;
+.footerInfo {
+  background-color: red;
+  font-size: 10px;
 }
-.footerP{
-    padding-left: 20px;
+.footerP {
+  padding-left: 20px;
 }
 
-.carouselIndex{
-    height: 400px;
-    color:#c40e20;
+.carouselIndex {
+  height: 400px;
+  color: #c40e20;
 }
-.divIndexDevis{
-   height: 250px;
-   padding: 0px;;
+.divIndexDevis {
+  height: 250px;
+  padding: 0px;
 }
-.divIndex{
-   height: 250px;
-   padding: 0px;;
+.divIndex {
+  height: 250px;
+  padding: 0px;
 }
-.alignTxt{
-    text-align: left;
+.alignTxt {
+  text-align: left;
 }
-.imgIndex{
-    width: 100%;
-    border: 1px solid white;
+.imgIndex {
+  width: 100%;
+  border: 1px solid white;
   object-fit: fill;
- padding: 0px;
-  
+  padding: 0px;
 }
-.divImgIndex{
-    height: 250px;
-    color: black;
+.divImgIndex {
+  height: 250px;
+  color: black;
 }
-.row{
-   margin:0;
+.row {
+  margin: 0;
 }
-.col-md-6{
-    padding: 0px;
+.col-md-6 {
+  padding: 0px;
 }
 .centered {
   position: absolute;
@@ -134,20 +131,21 @@ nav a:hover{
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.btn-danger{
-    background-color: rgb(69, 137, 166);
+.btn-danger {
+  background-color: rgb(69, 137, 166);
 }
-.btn-danger:hover{
-    background-color: rgb(69, 137, 166);
+.btn-danger:hover {
+  background-color: rgb(69, 137, 166);
 }
-.divImgIndex:hover{
-  
+.divImgIndex:hover {
   color: red;
-
 }
-.divLg{
-    height: 30px;
+.divLg {
+  height: 30px;
 }
-.icon{
-    font-size: 50px;
+.icon {
+  font-size: 50px;
+}
+.navColor {
+  color: White;
 }
