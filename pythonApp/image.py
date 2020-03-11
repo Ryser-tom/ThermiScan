@@ -11,18 +11,6 @@ pyt.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\Tesseract.ex
 regex = r"\d+\,\d+"
 
 def read_break_image(frame, image, folderSource):
-    #print(file_name, 'start of treatment')
-    #image = cv2.imread('capture.png')
-    #text=pyt.image_to_string(image)
-    #print(text)
-    #write_csv(text)
-
-    #img style
-    #image = Image.open(file_name)
-    #cropped = image.crop((30, 0, 330, 170))
-
-    #CV2 style
-    #crop_img = image[170:330, 0:30]
     
     # Set minimum and max HSV values to display
     lower = np.array([0, 0, 250])#0,0,0
