@@ -30,7 +30,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Atelier Technicien 1\&2}
-\lhead{Rapport - Arca'Box}
+\lhead{Rapport - ThermiScan}
 \cfoot{\thepage\ sur \pageref{LastPage}}
 \rfoot{\footnotesize \thedate}
 
@@ -110,143 +110,213 @@ Nous devons réaliser une application en Web qui doit nous permettre d’affiche
 \clearpage
 
 \section{Réalisations}
-\subsection{Application de sélection des jeux}
-L'application permettant de sélectionner  les jeux à été réalisé avec Unity 3D, nous avons utilisé l'asset gratuite \textit{SliderMenu} que nous avons un peu modifié pour quel corresponde à nos exigences.
 
-\subsubsection{Ajout de jeux}
-Pour ajouter un jeu sur l'application, il suffit d'ajouter un dossier nommé par le nom du jeu et contenant les dossiers respectant la hiérarchie suivante :
-\begin{itemize}
-    \item App
-    \begin{itemize}
-        \item \textit{Contient les fichiers du jeu}
-        \item \textbf{game.exe} (L'exécutable du jeu doit être nommer comme-ça)
-    \end{itemize}
-    \item image.jpg
-\end{itemize}
-\subsubsection{Lancement automatique}
-Pour pouvoir lancer automatiquement l'application de sélection de jeux, il suffit de placer un raccourci de l'exécutable de l'application dans le dossier de démarrage automatique d'application accessible en effectuant la commande \texttt{shell:startup} sur la boite de dialogue \texttt{Éxecuter (Win + R)}.
-
-\clearpage
-
-\subsubsection{Login automatique à une session}
-Tout d'abord, il faut se rendre sur la boite de dialogue \texttt{Éxecuter (Win + R)} et entrer la commande suivante : \texttt{control userpasswords2}
-
-\begin{figure}[htp]
-    \centering
-    \includegraphics[scale=.75]{control_passwords.png}
-    \caption{Commande d'accès aux contrôle des mots de passes}
-    \label{fig:control_passwords}
-\end{figure}
-
-Ensuite, il faut cliquer sur l'utilisateur que l'on veut déconnecter automatiquement et décocher la case \textit{Les utilisateurs doivent entrer un nom d'utilisateur et un mot de passe pour utiliser cet ordinateur}.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=.6]{users.png}
-    \caption{Dés-activation du mot de passe pour un compte utilisateur}
-    \label{fig:users}
-\end{figure}
-
-Il suffira ensuite de confirmer le retrait du mot de passe pour le compte pour lui permettre de se connecter automatiquement.
-
-\clearpage
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=.6]{confirm_session.png}
-    \caption{Confirmation du passage en mode connexion automatique}
-    \label{fig:confirm_password}
-\end{figure}
-
-\subsubsection{Description du code}
-Le code gérant les jeux se trouve dans \texttt{GameLoader.cs}, d'abord la fonction \texttt{Start} (appelé lors de l'initialisation de la classe). Elle initialise le dictionnaire de jeux, récupère la liste de slides se trouvant sur la classe \texttt{SliderMenu} se trouvant sur la caméra principale, on désactive la visibilité du curseur et on charge la liste des jeux.
+\subsection{Description du code}
+le fichier \texttt{background.py} détecte si une modification a eu lieu dans le dossier \textit{toDo}, et envoie le chemin du fichier \textit{video.mp4} à \texttt{extract.py}.
+\subsubsection{background.py}	
+\lstset{language=Python}
 \begin{lstlisting}
-void Start()
-{
-    this.Games = new Dictionary<string, string>();
+import extract  # For the image script
 
-    GameObject camera = GameObject.Find("Main Camera");
-    SliderMenu script = camera.GetComponent<SliderMenu>();
-    Slides = script.Slides = new List<GameObject>();
+import logging  # To create easy log file
+import time  # For the time.sleep
+import threading # For 
+import os
+import shutil #To move the folder
+import pytesseract as pyt
 
-    Cursor.visible = false;
+# For the file detection, It doesn't work on 64-bit
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 
-    LoadGames();
-}
+# configuration for the logging function
+logging.basicConfig(filename='app.log',
+                    filemode='a',# filemode='a' is for append
+                    format='%(asctime)s - %(message)s',
+                    datefmt='%d-%b-%y %H:%M:%S')
+
+#class that wait for an event, when it get's an event it call the Handler class and give him the event
+class Watcher:
+    DIRECTORY_TO_WATCH = "../web/file/toDo"
+    
+    def __init__(self):
+        self.observer = Observer()
+        pass
+
+    def run(self):
+        event_handler = Handler()
+        self.observer.schedule(event_handler,
+                               self.DIRECTORY_TO_WATCH,
+                               recursive=True)
+        self.observer.start()
+        try:
+            while True:
+                time.sleep(5)
+        except:
+            self.observer.stop()
+            print("Error")
+
+#called if an event occured
+class Handler(FileSystemEventHandler):
+    @staticmethod
+    def on_any_event(event):
+
+        # global is used to tell that we will modifiy the global variable
+        global folderName
+
+        # event_type can be : created, modified, deleted
+        # is_directory is used to tel if the event concern a folder or not by a boolean
+        if event.event_type == 'created' and event.is_directory == False:
+
+            # example of event.src_path '../web/file/toDo\ 
+            # 8675ab54b50cc355a5665dd33827806c14fbe71b\video.mp4'
+            path = event.src_path.split('/')
+            print(event.src_path)
+            path2 = path[3].split('\\')
+
+            # example of source '../web/file/toDo/
+            # 8675ab54b50cc355a5665dd33827806c14fbe71b'
+            source = path[0] + "/" + path[1] + "/" + path[2] + "/" + path2[0] + "/" + path2[1]
+
+            # example of destination '../web/file/done'
+            #destination is used when moving the folder at the end.
+            destination = path[0] + "/" + path[1] + "/" + path[2] + "/" + "done"
+            
+            # test if the file is the video.mp4, and the folder is diffrent than the last one (to prevent the script from running twice on the same video)
+            if path2[-1] == 'video.mp4' and folderName != path2[-2]:
+                folderName = path2[-2]
+                print('event type: ' + event.event_type + ' and is a directory: ' + str(event.is_directory) + ' name is: ' + path2[-1] + ' source is :' + folderName)
+
+                # prepare the function that will be called as a thread, and then start the thread
+                thread = threading.Thread(target=extract.extractFrames(event.src_path, source))
+                thread.start()
+
+                # wait here for the end of the thread before continuing
+                thread.join()
+                logging.warning('The file at %s has been added' % event.src_path)
+
+
+                # Try to move the folder now that the script is almost finished.
+                try:
+                    shutil.move(source, destination)
+                    print('The folder as been moved.')
+                except:
+                    pass
+                    print("An exception occurred, could not move the folder")
+            
+            
+
+
+if __name__ == '__main__':
+    folderName = ''
+    scriptDirectory = os.path.dirname(os.path.realpath(__file__))
+    print('start: background script for Thermiscan project!')
+    w = Watcher()
+    w.run()
 \end{lstlisting}
 
-La fonction \texttt{Update} est appelée à chaque \textit{frame}, dans cette fonction, on vérifie les boutons appuyiez par les joueurs et on effectue une action approprié pour chaque entré clavier. Lors de l'utilisation des joysticks vers la gauche ou la droite on invoque les cliques des boutons permettant de changer de slide. Lors de l'appui sur le bouton \textit{8 (Dollars)}, on coupe le volume de la musique du menu puis récupérons le nom du jeu puis un \textit{Process} va lancer l'exécutable du jeu sélectionner.
+le fichier \texttt{extract.py} lit la vidéo dans le chemin spécifié par \texttt{background.py}, et il en extrait les images pour les envoyer à \texttt{image.py}.
+\subsubsection{extract.py}
 \begin{lstlisting}
-void Update()
-{
-    if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
-    {
-        btnLeft.onClick.Invoke();
-    }
+import image
 
-    if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
-    {
-        btnRight.onClick.Invoke();
-    }
+# Importing all necessary libraries
+import cv2 # For the text recognition
+import os 
+import csv # To write the csv
 
-    if (Input.GetKeyDown(KeyCode.Alpha8))
-    {
-        audioSource.volume = 0f;
+# Read the video from specified path
+path = "..//video//vidTest.mp4"
+def extractFrames(path, folderSource):
+    print('start extract.py')
+    cam = cv2.VideoCapture(path)
+    try:
+        # creating a folder named data
+        if not os.path.exists('/data'):
+            os.makedirs('/data')
+            
+    # if not created then raise error
+    except OSError:
+        print('Error: Creating directory of data')
 
-        string selectedGame = slides.transform.GetChild(slides.transform.childCount - 1).name;
+    # frame counter
+    currentframe = 0
+    print(cam)
 
-        UnityEngine.Debug.Log(audioSource.volume);
+    while (True):
 
-        string path = @"" + Games[selectedGame] + "\\App\\game.exe";
+        # reading from frame
+        ret, frame = cam.read()
 
-        Process gameApp = new Process();
-        gameApp.StartInfo.FileName = path;
-        gameApp.Start();
-    }
-}
+        if ret:
+            # if video is still left continue creating images
+            name = './data/frame' + str(currentframe) + '.jpg'
+
+            # writing the extracted images to be processed in image.py
+            cv2.imwrite(name, frame)
+            image.read_break_image(currentframe, frame, folderSource)
+            currentframe += 1
+        else:
+            break
+
+    # Release all space and windows once done
+    print('extract done')
+    cam.release()
+    cv2.destroyAllWindows()
 \end{lstlisting}
 
-La fonction \texttt{OnApplicationFocus} est appelée lorsque le menu à de nouveau le \textit{focus}, alors on remet le volume sonore de la musique au maximum.
+le fichier \texttt{image.py} est appelé pour traiter une image et enregistrer ses valeurs dans un CSV.
+\subsubsection{image.py}
 \begin{lstlisting}
-void OnApplicationFocus(bool hasFocus)
-{
-    if (hasFocus)
-        audioSource.volume = 100f;
-}
-\end{lstlisting}
+import csv
+import re
+import os
+import sys
+import numpy as np
+from PIL import Image
+import cv2
+import pytesseract as pyt
+#uncomment the next line to execute on Windows
+pyt.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\Tesseract.exe'
+regex = r"\d+\,\d+"
 
-La fonction \texttt{OnApplicationFocus} va charger la liste des jeux, créer les objets nécessaire pour être ajouté à l'objet \textit{Slider} avec toutes les données nécessaire : nom, texte, image.
-\begin{lstlisting}
-private void LoadGames()
-{
-    DirectoryInfo dir = new DirectoryInfo(GAME_DIRECTORY);
+def read_break_image(frame, image, folderSource):
+    
+    # Set minimum and max HSV values to display
+    lower = np.array([0, 0, 250])#0,0,0
+    upper = np.array([179, 70, 255])#179,70,255
 
-    foreach (DirectoryInfo d in dir.GetDirectories())
-    {
-        this.Games.Add(d.Name, d.FullName);
-    }
+    # Create HSV Image and threshold into a range.
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    mask = cv2.inRange(hsv, lower, upper)
+    output = cv2.bitwise_and(image,image, mask= mask)
+    img_to_read = cv2.bitwise_not(output)
+    img_to_read = img_to_read[0:110, 10:240]
 
-    foreach (var game in this.Games)
-    {
+    cv2.imwrite('out.png', img_to_read)
+    text = pyt.image_to_string(img_to_read)
+    write_csv(text, frame, folderSource)
 
-        GameObject gmObj = Instantiate(gameExample, transform.position, transform.rotation);
-        Text gmObjText = gmObj.GetComponentInChildren<Text>();
-        Image gmObjImage = gmObj.GetComponentInChildren<Image>();
+
+def write_csv(row, frame, folderSource):
+    with open(folderSource + '/value.csv', 'a', newline='') as outfile:
+        writer = csv.writer(outfile,  delimiter=';',
+                            quotechar=' ', quoting = csv.QUOTE_NONNUMERIC)
+        #data_writer.writerow(['Min', 'Moy', 'Max'])
         
-        //Load values
-        gmObj.transform.SetParent(slides.transform);
-        gmObj.name = game.Key;
-        gmObjText.text = game.Key;
+        matches = re.findall("\d+\,\d+", row)
+        if len(matches) == 3:
+            writer.writerow([frame, matches[2], matches[0], matches[1]])
+            #print(frame, 'OK')
+        else:
+            print('dead')
+            print(matches)
 
-        //Load image
-        byte[] data = File.ReadAllBytes(game.Value + "\\image.jpg");
-        Texture2D texture = new Texture2D(64, 64, TextureFormat.ARGB32, false);
-        texture.LoadImage(data);
-        gmObjImage.sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
+if __name__ == '__main__':
+    #print('image file.started.')
+    read_break_image("capture.png")
+    #print('End of image.py script')
 
-        Slides.Add(gmObj);
-    }
-}
 \end{lstlisting}
 
 \section{Conclusion}
