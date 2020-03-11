@@ -109,6 +109,29 @@ Nous devons réaliser une application en Web qui doit nous permettre d’affiche
 
 \clearpage
 
+\subsubsection{Installation de Tesseract}
+    \begin{enumerate}
+        \item Exécuter dans le cmd \textit{pip install pytesseract}
+         \item Télécharger Tesseract OCR sur \url{https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-v5.0.0-alpha.20200223.exe} et faire l'installation par défaut.
+        \item Déplacer le dossier contenu dans le .zip sous \path{C:\Program Files}.
+        \item Dans la barre de recherche Windows, taper \textit{"Modifier les variables d'environnement système"}.
+        \item Cliquer sur le bouton \textit{"Variable d'environnement"} en bas de la page.
+        \item Cliquer sur \textit{"Nouvelle..."} pour les variables d'administrateur.
+        \item Nom de la variable : \texttt{TESSDATA\_PREFIX}.
+        \item{Cliquer sur \textit{"Parcourir le répertoire"} et sélectionner Tessdata sous \path{C:\Program Files\tesseract-OCR\tessdata}}
+    \end{enumerate}
+
+\subsubsection{Installation de Python 3.8}
+    \begin{enumerate}
+        \item Aller sur le site de python : \url{https://www.python.org/downloads/release/python-382/}
+        \item Prendre \textit{Windows x86 executable installer}.
+        \item Au début de l'installation, sélectionner \textit{Add Python 3.8 to PATH}.
+        \item À la fin de l'installation, cliquer sur \textit{Disable Path Length limit}.
+        \item Après l'installation de Tesseract, Ouvrir le cmd et aller dans le dossier \texttt{pythonApp} du projet et exécuter dans le cmd \textit{pip install -r requirements.txt}
+    \end{enumerate}
+
+\clearpage
+
 \section{Réalisations}
 
 \subsection{Description du code}
