@@ -15,6 +15,7 @@
 \usepackage{fancyhdr}
 \usepackage{multicol}
 \usepackage{vmargin}
+\usepackage{float}
 \setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
 
 \title{ThermiScan}
@@ -129,12 +130,64 @@ Nous devons réaliser une application en Web qui doit nous permettre d’affiche
         \item À la fin de l'installation, cliquer sur \textit{Disable Path Length limit}.
         \item Après l'installation de Tesseract, Ouvrir le cmd et aller dans le dossier \texttt{pythonApp} du projet et exécuter dans le cmd \textit{pip install -r requirements.txt}
     \end{enumerate}
-
+\subsection{Github}
+    \url{https://github.com/Ryser-tom/ThermiScan.git}
 \clearpage
 
 \section{Réalisations}
+\subsection{base de données}
+\includegraphics[scale = 0.5]{diagram.png}\\
+\begin{itemize}
+        \item Camera : Stock le nom des differentes camera des utilisateurs. 
+        \item Video : Stock les information des video comme la date d'ajout et la camera associer a la video.
+        \item Users : Stock le nom d'utilisateur et les mot de passe des diferents utilisateurs.
+    \end{itemize}
 
 \subsection{Description du code}
+\begin{table}[H]
+\caption{function.php}
+\resizebox{\textwidth}{!}{\begin{tabular}{|l|l|}
+\hline
+Nom & Paramètres \\ \hline
+GetListOfvideoCameraVue(\$idCamera) & retourne sous forme de lien toutes les videos \\ 
+                                    & en lien avec une camera ou toutes les videos \\ \hline
+GetListOfCameraVue()                & retourne la liste des cameras sous forme de lien \\ \hline
+GetListOfCameraUserVue()            & retourne la liste des cameras sous forme d'option \\
+                                    & pour formulaire \\ \hline
+GetInfosVideo(\$videoId)            & retourne les informations d'une video \\ \hline
+GetFirstCameraUser()                & retourne une camera de l'utilisateur connecter \\ \hline
+\end{tabular}}
+\end{table}
+
+\begin{table}[H]
+\caption{user.php}
+\resizebox{\textwidth}{!}{\begin{tabular}{|l|l|}
+\hline
+Nom & Paramètres \\ \hline
+\_\_construct(\$username, \$idUser) & Constructeur de la classe \\ \hline
+GetUsername()                       & retourne le nom d'utilisateur de l'utilisateur \\ \hline
+GetIdUser()                         & retourne l'id de l'utilisateur \\ \hline
+GetListOfCameraUser()               & retourne la liste des cameras de l'utilisateur \\
+GetListOfVideo()                    & retourne toutes les videos d'un utilisateur \\ \hline
+GetListOfVideoByCamera(\$idCamera)  & retourne la liste de video liée a une camera \\ \hline
+\end{tabular}}
+\end{table}
+
+\begin{table}[H]
+\caption{pdo.php}
+\resizebox{\textwidth}{!}{\begin{tabular}{|l|l|}
+\hline
+Nom & Paramètres \\ \hline
+\_\_construct(\$host, \$dbname, \$user, \$password) & Constructeur de la classe \\ \hline
+CreateConnexion()                           & Crée une connexion à la BDD \\ \hline
+Select(\$select, \$from, \$where, \$order)  & Permet d’executer un select de façon simple \\ \hline
+Delete(\$from, \$where)                     & Permet d’executer un delete de façon simple \\ \hline
+Update(\$from, \$set, \$where)              & Permet d’executer un update de façon simple \\ \hline
+Execute(\$requete)                          & Execute la requete SQL passer en paramètre \\ \hline
+SelectFull(\$select)                        & Retourne le resultat de la requete passée en paramètre \\ \hline
+\end{tabular}}
+\end{table}
+
 le fichier \texttt{background.py} détecte si une modification a eu lieu dans le dossier \textit{toDo}, et envoie le chemin du fichier \textit{video.mp4} à \texttt{extract.py}.
 \subsubsection{background.py}	
 \lstset{language=Python}
@@ -352,8 +405,4 @@ Le problème majeur rencontré dès le début du projet est l’indisponibilité
 Plusieurs problèmes se sont joint lors de la création du graphique. Premièrement, il nous fallait trouver un script JS permettant d’afficher un graphique à partir de valeur venant d’un fichier CSV. Lors de nos premiers tests, le problème principal était l’importation de nos valeurs dans les tableaux, les graphiques ne possédant pas de tableau souple au niveaux des données entrées. Nous avons essayé avec un graphique venant de \url{www.amcharts.com} et un autre venant de \url{www.highcharts.com}. En fin de compte, Nous nous sommes occupé d’en faire un, en reprenant des parties de code provenant des anciens tests. 
 
 \clearpage
-
-\addcontentsline{toc}{section}{\listfigurename}
-\listoffigures
-
 \end{document}
